@@ -57,3 +57,10 @@ Para acessar a base de dados:
 // remove todas imagens
 docker rmi -f $(docker images -q)
 ```
+
+## Database
+Como sabemos o banco de dados em um ambiente de microsserviços deve ser especifico para cada,
+neste projeto para economizar processamento e complexidade só existe um db, repartido por schemas.
+
+ms_users
+ms_transactions
