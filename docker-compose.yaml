@@ -1,0 +1,9 @@
+services:
+  ms-users:
+    build: ./ms-users
+    ports:
+      - "8080:8080"
+  ms-transactions:
+    build: ./ms-transactions
+    ports:
+      - "8081:8080"
