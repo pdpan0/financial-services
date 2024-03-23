@@ -4,12 +4,22 @@ spring:
   application:
     name: ms-users
   datasource:
-    url: jdbc:postgresql://db.network:5432/financial_services_db
+    url: jdbc:postgresql://172.19.0.2:5432/financial_services_db # local
+#    url: jdbc:postgresql://db.network:5432/financial_services_db # conteiners
     username: admin
     password: admin
+
   jpa:
-    hibernate:
-      ddl-auto: create-drop # <create | create-drop | update | validate | none>
+#    hibernate:
+#      ddl-auto: create-drop # <create | create-drop | update | validate | none>
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: ms_users
+    show-sql: true
+  sql:
+    init:
+      mode: always
+logging:
+  level:
+    org.hibernate: DEBUG
