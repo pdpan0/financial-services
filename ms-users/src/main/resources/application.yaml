@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    active: default
+  application:
+    name: ms-users
+  datasource:
+    url: jdbc:postgresql://db.network:5432/financial_services_db
+    username: admin
+    password: admin
+  jpa:
+    hibernate:
+      ddl-auto: create-drop # <create | create-drop | update | validate | none>
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect

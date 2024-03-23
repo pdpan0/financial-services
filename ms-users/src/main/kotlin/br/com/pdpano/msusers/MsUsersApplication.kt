@@ -1,4 +1,4 @@
-package br.com.pdpano.mstransactions
+package br.com.pdpano.msusers
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

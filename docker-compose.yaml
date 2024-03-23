@@ -3,7 +3,45 @@ services:
     build: ./ms-users
     ports:
       - "8080:8080"
+    volumes:
+      - user_data:/var/lib/microservices/users
+    networks:
+      microservices_network:
+        aliases:
+          - users.ms
+    depends_on:
+      - db
   ms-transactions:
     build: ./ms-transactions
     ports:
       - "8081:8080"
+    volumes:
+      - transaction_data:/var/lib/microservices/transactions
+    networks:
+      microservices_network:
+        aliases:
+          - transactions.ms
+    depends_on:
+      - db
+  db:
+    image: postgres
+    ports:
+      - 5432:5432
+    restart: always
+    shm_size: 128mb
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=financial_services_db
+    networks:
+      microservices_network:
+        aliases:
+          - db.network
+networks:
+  microservices_network:
+volumes:
+  user_data:
+  transaction_data:
+  db_data:

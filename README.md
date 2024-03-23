@@ -10,7 +10,12 @@
 This microservices project aims at a subscription model, providing users access to premium content through subscription. It includes services for authentication, subscription management, payment processing, and access control.
 
 ## Getting Started <a name = "getting_started"></a>
-`docker compose up`
+Basta gerar o jar com:
+`./gradlew clean build`
+e com o docker instalado executar o comando:
+```shell
+docker compose up
+```
 
 ### Prerequisites
 
@@ -40,4 +45,15 @@ End with an example of getting some data out of the system or using it for a lit
 
 ## Usage <a name = "usage"></a>
 
-Add notes about how to use the system.
+Para acessar a base de dados:
+
+```sql
+
+```
+
+## Comandos Docker
+
+```shell
+// remove todas imagens
+docker rmi -f $(docker images -q)
+```

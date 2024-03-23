@@ -30,7 +30,7 @@ dependencies {
 	implementation 'org.jetbrains.kotlin:kotlin-reflect'
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'com.h2database:h2'
+	implementation 'org.postgresql:postgresql:42.7.3'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
