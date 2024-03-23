@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class MsTransactionsApplication
+class MsUsersApplication
 
 fun main(args: Array<String>) {
-	runApplication<MsTransactionsApplication>(*args)
+	runApplication<MsUsersApplication>(*args)
 }
