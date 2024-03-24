@@ -1,6 +1,5 @@
 package br.com.pdpano.msusers.usecase.validateuser
 
-import br.com.pdpano.msusers.domain.User
 import br.com.pdpano.msusers.domain._dto.CreateUserDTO
 import br.com.pdpano.msusers.usecase.UseCase
 

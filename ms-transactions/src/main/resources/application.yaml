@@ -1,0 +1,38 @@
+spring:
+  profiles:
+    active: default
+  application:
+    name: ms-transactions
+  datasource:
+    url: jdbc:postgresql://172.19.0.2:5432/financial_services_db # local
+#    url: jdbc:postgresql://db.network:5432/financial_services_db # conteiners
+    username: admin
+    password: admin
+  jpa:
+    hibernate:
+      ddl-auto: none # <create | create-drop | update | validate | none>
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: ms_transactions
+    show-sql: true
+  sql:
+    init:
+      mode: always
+springdoc:
+  api-docs:
+    path: /api-docs
+logging:
+  level:
+    root: debug
+
+ms-transactions:
+  clients:
+    # noinspection SpringBootApplicationYaml
+    mocky: https://run.mocky.io/v3/
+    # noinspection SpringBootApplicationYaml
+    authenticator: 5794d450-d2e2-4412-8131-73d0293ac1cc
+    # noinspection SpringBootApplicationYaml
+    notification: 54dc2cf1-3add-45b5-b5a9-6bf7e7f1f4a6
+    # noinspection SpringBootApplicationYaml
+    ms-users: users.ms:8080
