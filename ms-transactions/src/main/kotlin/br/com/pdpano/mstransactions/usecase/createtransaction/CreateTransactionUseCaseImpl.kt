@@ -1,44 +1,56 @@
 package br.com.pdpano.mstransactions.usecase.createtransaction
 
+import br.com.pdpano.mstransactions.domain.transactions.TransactionGateway
 import br.com.pdpano.mstransactions.domain._dto.CreateTransactionDTO
 import br.com.pdpano.mstransactions.domain._exceptions.CreateTransactionException
 import br.com.pdpano.mstransactions.infra.clients.AuthenticatorClient
 import br.com.pdpano.mstransactions.infra.clients.NotificationClient
 import br.com.pdpano.mstransactions.infra.clients.UserClient
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
-import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.coroutineContext
-import kotlin.coroutines.suspendCoroutine
 
 @Service
 class CreateTransactionUseCaseImpl(
     private val client: AuthenticatorClient,
     private val notificationClient: NotificationClient,
-    private val userClient: UserClient
+    private val userClient: UserClient,
+    private val transactionGateway: TransactionGateway
 ): CreateTransactionUseCase {
+    private val logger = LoggerFactory.getLogger(this::class.java)
 
+    //TODO: chain of responsability?
     override fun execute(input: CreateTransactionDTO): Long {
-        val payee = userClient.getUserById(input.idPayee)
-        val payer = userClient.getUserById(input.idPayer)
+        if (input.idPayee == input.idPayer) {
+            throw CreateTransactionException("The payer cannot make the transfer to himself")
+        }
+
+        logger.info("Getting user information")
+        val payee = userClient.getUserById(input.idPayee).result
+        val payer = userClient.getUserById(input.idPayer).result
+
+        if (!payee.isActive || !payer.isActive) {
+            throw CreateTransactionException("Unable to transfer to inactive users")
+        }
 
         if (payer.isShopkeeper) {
-            throw CreateTransactionException("Shopkeeper does not allowed to transaction")
+            throw CreateTransactionException("Shopkeeper is not allowed to make transaction")
         }
 
         if (payer.vlBalance < input.vlTransaction) {
-            throw CreateTransactionException("Payer does not have sufficient balance")
+            throw CreateTransactionException("The payer does not have sufficient balance")
         }
 
-        if (client.authenticate() != "Autorizado") {
+        if (client.authenticate().message != "Autorizado") {
             throw CreateTransactionException("Transaction not allowed")
         }
 
-        notificationClient.notify()
+        val idTransaction = transactionGateway.createTransaction(input)
 
-        return 0L
+        if (notificationClient.notify().message) {
+            logger.info("Message sent with successfully")
+        }
+
+        return idTransaction
     }
 
 }
