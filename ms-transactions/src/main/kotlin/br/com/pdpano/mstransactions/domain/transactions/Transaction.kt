@@ -1,4 +1,4 @@
-package br.com.pdpano.mstransactions.domain
+package br.com.pdpano.mstransactions.domain.transactions
 
 import java.math.BigDecimal
 import java.time.LocalDateTime
