@@ -6,8 +6,8 @@ import java.sql.ResultSet
 
 object UserJdbcUtils {
     const val CREATE_USER_SQL = """
-        INSERT INTO ms_users.tb_users(full_name, tax_number, email, password, is_shopkeeper)
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO ms_users.tb_users(full_name, tax_number, email, password, is_shopkeeper, vl_balance)
+        VALUES (?, ?, ?, ?, ?, ?)
         RETURNING id_user
     """
 
@@ -15,8 +15,8 @@ object UserJdbcUtils {
         SELECT * FROM ms_users.tb_users WHERE id_user = ?
     """
 
-    const val GET_USERS_SQL = """
-        SELECT * FROM ms_users.tb_users
+    const val FIND_USER_BY_EMAIL_OR_TAX_NUMBER_SQL = """
+        SELECT * FROM ms_users.tb_users WHERE email = ? OR tax_number = ?
     """
 
     class UserRowMapper : RowMapper<User> {

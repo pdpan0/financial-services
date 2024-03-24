@@ -3,11 +3,8 @@ package br.com.pdpano.msusers.domain
 import java.math.BigDecimal
 import java.time.LocalDateTime
 
-/**
- * Entidade de usuários.
- */
 class User(
-    email: String,
+    val email: String,
     val idUser: Long,
     val fullName: String,
     val taxNumber: String,
@@ -17,15 +14,15 @@ class User(
     val createdAt: LocalDateTime = LocalDateTime.now(),
     val isActive: Boolean = true
 ) {
-    val email: String = validateEmail(email)
+//    val email: String = validateEmail(email)
 
-    private fun validateEmail(email: String): String {
-        require(Utils.isValidEmail(email)) {
-            "Email is invalid"
-        }
-
-        return email
-    }
+//    private fun validateEmail(email: String): String {
+//        require(Utils.isValidEmail(email)) {
+//            "Email is invalid"
+//        }
+//
+//        return email
+//    }
 
     //TODO: Validar o CPF
 

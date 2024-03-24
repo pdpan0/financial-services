@@ -8,4 +8,5 @@ import br.com.pdpano.msusers.domain._dto.CreateUserDTO
 interface UserGateway {
     fun createUser(user: CreateUserDTO): Long
     fun getUserById(idUser: Long): User
+    fun existUser(email: String, taxNumber: String): Boolean
 }
