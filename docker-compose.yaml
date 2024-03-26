@@ -11,6 +11,11 @@ services:
           - users.ms
     depends_on:
       - db
+    environment:
+      - MS_USER_PORT=8080
+      - MS_TRANSACTION_PORT=8080
+      - MS_TRANSACTION_DOMAIN=transactions.ms
+      - DB_DOMAIN=db.network
   ms-transactions:
     build: ./ms-transactions
     ports:
@@ -23,6 +28,11 @@ services:
           - transactions.ms
     depends_on:
       - db
+    environment:
+      - MS_TRANSACTION_PORT=8080
+      - MS_USER_DOMAIN=users.ms
+      - MS_USER_PORT=8080
+      - DB_DOMAIN=db.network
   db:
     image: postgres
     ports:
