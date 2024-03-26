@@ -24,7 +24,6 @@ class CreateTransactionUseCaseImpl(
 ): CreateTransactionUseCase {
     private val logger = LoggerFactory.getLogger(this::class.java)
 
-    //TODO: chain of responsability?
     override fun execute(input: CreateTransactionDTO): Long {
         if (input.idPayee == input.idPayer) {
             throw CreateTransactionException("The payer cannot make the transfer to himself")
@@ -52,7 +51,12 @@ class CreateTransactionUseCaseImpl(
 
          val idTransaction = transactionGateway.createTransaction(input)
 
-        userClient.transferBalance(TransferBalanceDTO(idTransaction, payee.idUser, payer.idUser, input.vlTransaction))
+        userClient.transferBalance(TransferBalanceDTO(
+            idTransaction = idTransaction,
+            idPayee = payee.idUser,
+            idPayer = payer.idUser,
+            vlTransaction = input.vlTransaction
+        ))
 
         CoroutineScope(Dispatchers.Default).launch {
             notify()

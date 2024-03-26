@@ -15,7 +15,7 @@ class TransferBalanceUseCaseImpl(
 ): TransferBalanceUseCase {
     override fun execute(input: TransferBalanceDTO): Boolean {
         val payer = userGateway.getUserById(input.idPayer)
-        val payee = userGateway.getUserById(input.idPayer)
+        val payee = userGateway.getUserById(input.idPayee)
 
         if (!payee.isActive || !payer.isActive) {
             throw InvalidTransferBalanceException("Unable to transfer to inactive users")
