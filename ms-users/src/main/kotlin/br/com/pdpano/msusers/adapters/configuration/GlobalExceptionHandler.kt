@@ -1,7 +1,8 @@
 package br.com.pdpano.msusers.adapters.configuration
 
-import br.com.pdpano.msusers.adapters.response.ResponseErrorMessage
+import br.com.pdpano.msusers.domain._response.ResponseErrorMessage
 import br.com.pdpano.msusers.domain._exceptions.CreateUserException
+import br.com.pdpano.msusers.domain._exceptions.InvalidUserException
 import br.com.pdpano.msusers.domain._exceptions.UserNotFoundException
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
@@ -23,6 +24,12 @@ class GlobalExceptionHandler {
             "Oops! Something went wrong. Our server encountered an unexpected error while processing your request. Please try again later. If the problem persists, feel free to contact our support team for assistance. We apologize for any inconvenience caused.",
             null
         )
+    }
+
+    @ExceptionHandler(InvalidUserException::class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    fun handleInvalidUserException(exception: InvalidUserException): ResponseErrorMessage<Nothing> {
+        return ResponseErrorMessage.build(exception)
     }
 
     @ExceptionHandler(CreateUserException::class)

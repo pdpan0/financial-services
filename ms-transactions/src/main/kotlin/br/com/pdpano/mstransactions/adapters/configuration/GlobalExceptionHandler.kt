@@ -1,6 +1,7 @@
 package br.com.pdpano.mstransactions.adapters.configuration
 
 import br.com.pdpano.mstransactions.domain._exceptions.CreateTransactionException
+import br.com.pdpano.mstransactions.domain._exceptions.RequestClientException
 import br.com.pdpano.mstransactions.domain._response.ResponseErrorMessage
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
@@ -22,6 +23,12 @@ class GlobalExceptionHandler {
             "Oops! Something went wrong. Our server encountered an unexpected error while processing your request. Please try again later. If the problem persists, feel free to contact our support team for assistance. We apologize for any inconvenience caused.",
             null
         )
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    fun handleRequestClientException(exception: RequestClientException): ResponseErrorMessage<String> {
+        return ResponseErrorMessage.build(exception, exception.client)
     }
 
     @ExceptionHandler(CreateTransactionException::class)
