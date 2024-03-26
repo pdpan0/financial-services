@@ -3,6 +3,15 @@
 ## Sobre <a name = "about"></a>
 Este projeto visa simular operações financeiras, tem como principio 2 microsserviços que simulam uma interação de usuários e transfêrencias.
 
+O banco é compartilhado apenas por facilidade, sendo "repartido" por schemas para facilidade de migração conforme criação de um banco dedicado.
+
+Utiliza-se da arquitetura limpa para independente do framework proteger o domínio.
+
+## Arquitetura Geral
+
+![alt text](./assets/financial_services_diagram)
+
+
 ## Como executar <a name = "getting_started"></a>
 Basta gerar o jar com:
 `./gradlew clean build`
