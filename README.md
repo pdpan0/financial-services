@@ -1,66 +1,32 @@
-# Microservices Application
+# Financial Services Application
 
-## Table of Contents
+## Conteúdo
 + [About](#about)
 + [Getting Started](#getting_started)
 + [Usage](#usage)
 + [Contributing](../CONTRIBUTING.md)
 
-## About <a name = "about"></a>
-This microservices project aims at a subscription model, providing users access to premium content through subscription. It includes services for authentication, subscription management, payment processing, and access control.
+## Sobre <a name = "about"></a>
+Este projeto visa simular operações financeiras, tem como principio 2 microsserviços que simulam uma interação de usuários e transfêrencias.
 
-## Getting Started <a name = "getting_started"></a>
+## Como executar <a name = "getting_started"></a>
 Basta gerar o jar com:
 `./gradlew clean build`
 e com o docker instalado executar o comando:
 ```shell
-docker compose up
+docker compose up -d
 ```
 
-### Prerequisites
+Isto irá inicializar os contêiners do banco de dados e os microsserviços correspondentes.
 
-What things you need to install the software and how to install them.
+### Pré Requisitos
 
-```
-Give examples
-```
+Este projeto é feito em kotlin e é necessário utilização do docker para rodar o banco de dados em postgresql.
 
-### Installing
+### Documentação <a name = "usage"></a>
 
-A step by step series of examples that tell you how to get a development env running.
-
-Say what the step will be
+Este projeto possui uma documentação, basta adicionar o domínio ao seguinte endpoint:
 
 ```
-Give the example
+/swagger-ui/index.html
 ```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo.
-
-## Usage <a name = "usage"></a>
-
-Para acessar a base de dados:
-
-```sql
-
-```
-
-## Comandos Docker
-
-```shell
-// remove todas imagens
-docker rmi -f $(docker images -q)
-```
-
-## Database
-Como sabemos o banco de dados em um ambiente de microsserviços deve ser especifico para cada,
-neste projeto para economizar processamento e complexidade só existe um db, repartido por schemas.
-
-ms_users
-ms_transactions
