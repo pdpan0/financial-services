@@ -2,6 +2,7 @@ package br.com.pdpano.mstransactions.infra.database.entities
 
 import br.com.pdpano.mstransactions.domain.transactions.TransactionStatus
 import br.com.pdpano.mstransactions.domain._dto.CreateTransactionDTO
+import br.com.pdpano.mstransactions.domain.transactions.Transaction
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
@@ -27,6 +28,14 @@ data class TransactionEntity(
             idTransaction = null,
             idPayer = idPayer,
             idPayee = idPayee,
+            vlTransaction = vlTransaction
+        )
+
+        fun TransactionEntity.toDomain() = Transaction(
+            idTransaction = idTransaction!!,
+            idPayer = idPayer,
+            idPayee = idPayee,
+            status = status,
             vlTransaction = vlTransaction
         )
     }
