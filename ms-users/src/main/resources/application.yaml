@@ -4,8 +4,7 @@ spring:
   application:
     name: ms-users
   datasource:
-    url: jdbc:postgresql://172.19.0.2:5432/financial_services_db # local
-#    url: jdbc:postgresql://db.network:5432/financial_services_db # conteiners
+    url: jdbc:postgresql://${DB_DOMAIN:DB_DOMAIN_LOCAL}:5432/financial_services_db # local
     username: admin
     password: admin
   jpa:
@@ -24,4 +23,10 @@ springdoc:
     path: /api-docs
 logging:
   level:
-    root: debug
+    root: info
+ms-users:
+  clients:
+    # noinspection SpringBootApplicationYaml
+    ms-transactions: ${MS_TRANSACTION_DOMAIN:localhost}:${MS_TRANSACTION_PORT:8081}
+server:
+  port: ${MS_USER_PORT:8080}
