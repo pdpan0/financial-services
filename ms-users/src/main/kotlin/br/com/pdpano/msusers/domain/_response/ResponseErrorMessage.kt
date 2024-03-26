@@ -1,4 +1,4 @@
-package br.com.pdpano.msusers.adapters.response
+package br.com.pdpano.msusers.domain._response
 
 data class ResponseErrorMessage<T>(
     val success: Boolean,
