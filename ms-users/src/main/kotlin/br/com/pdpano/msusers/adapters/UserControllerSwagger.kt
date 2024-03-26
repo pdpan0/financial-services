@@ -1,6 +1,6 @@
 package br.com.pdpano.msusers.adapters
 
-import br.com.pdpano.msusers.adapters.response.ResponseMessage
+import br.com.pdpano.msusers.domain._response.ResponseMessage
 import br.com.pdpano.msusers.domain._dto.CreateUserDTO
 import br.com.pdpano.msusers.domain._dto.GetUserByIdDTO
 import br.com.pdpano.msusers.domain._dto.TransferBalanceDTO
